@@ -17,25 +17,25 @@ const handleClick = (event) => {
   event.preventDefault()
 
   const numberInput = document.querySelector('#numberInput')
-  const rightAnswer = numberInput.value == randomNumber
+  const wrongAnswer = numberInput.value != randomNumber
 
   if(numberInput.value < 0 || numberInput.value > 10) {
     alert('O número deve ser entre 0 e 10')
     return
   }
 
-  if(rightAnswer) {
-    toggleScreen()
+  if(wrongAnswer) {
+    guessText.innerText = `${attempts}° tentativa, tente novamente!`
 
-    attempts > 1 ? finishedText.innerText = `Acertou em ${attempts} tentativas!` : finishedText.innerText = `Acertou em ${attempts} tentativa!`
+    attempts++
+    numberInput.value = ''
 
     return
   }
 
-  guessText.innerText = `${attempts}° tentativa, tente novamente!`
+  toggleScreen()
 
-  attempts++
-  numberInput.value = ''
+  attempts > 1 ? finishedText.innerText = `Acertou em ${attempts} tentativas!` : finishedText.innerText = `Acertou em ${attempts} tentativa!`
 }
 
 const handleResetClick = (event) => {
